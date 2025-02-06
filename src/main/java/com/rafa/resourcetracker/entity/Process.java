@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import jakarta.persistence.Entity;
 
 public class Process {
-    private Long id;
+    private int id;
     private String name;
     private double cpuUsage;
     private double gpuUsage;
@@ -16,7 +16,7 @@ public class Process {
 
     public Process() { }
 
-    public Process(Long id, String name, double cpuUsage, double gpuUsage, double memoryUsage, double diskUsage,
+    public Process(int id, String name, double cpuUsage, double gpuUsage, double memoryUsage, double diskUsage,
             double networkUsage, LocalDateTime timestamp) {
         this.id = id;
         this.name = name;
@@ -28,10 +28,10 @@ public class Process {
         this.timestamp = timestamp;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
     public String getName() {
@@ -81,7 +81,7 @@ public class Process {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + id;
         return result;
     }
 
@@ -94,13 +94,12 @@ public class Process {
         if (getClass() != obj.getClass())
             return false;
         Process other = (Process) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
+        if (id != other.id)
             return false;
         return true;
     }
+
+   
 
     
 }
