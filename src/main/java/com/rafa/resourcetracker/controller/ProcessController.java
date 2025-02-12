@@ -7,17 +7,22 @@ import com.rafa.resourcetracker.service.ProcessService;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 
 
 @RestController
 public class ProcessController {
+    @Autowired
     private ProcessService processService = new ProcessService();
 
-    @GetMapping("/test")
-    public List<ProcessDTO> getProcessList() {
-        return processService.getProcessList();
-    }
-    
+    @Autowired
+    private SimpMessagingTemplate template;
+
+    @Scheduled(fixedDelay=2000)
+	public void updateProcessList() {
+        List<ProcessDTO> processList = processService.getProcessList();
+		this.template.convertAndSend("/topic/process", processList);
+	}
 }
