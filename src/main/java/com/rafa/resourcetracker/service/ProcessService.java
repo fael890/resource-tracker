@@ -1,10 +1,14 @@
 package com.rafa.resourcetracker.service;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.stereotype.Service;
 import com.rafa.resourcetracker.dto.ProcessDTO;
-import com.rafa.resourcetracker.entity.Process;
+import com.rafa.resourcetracker.entity.ProcessEntity;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.software.os.OSProcess;
@@ -24,7 +28,7 @@ public class ProcessService {
         
         processList = osProcessList.stream()
         .map(
-            process -> new Process(
+            process -> new ProcessEntity(
                 process.getProcessID(), 
                 process.getName(),
                 (process.getProcessCpuLoadBetweenTicks(process)*100d)/processor.getLogicalProcessorCount(),
@@ -38,6 +42,24 @@ public class ProcessService {
         .map(entity -> new ProcessDTO(entity)).toList();
 
         return processList;
+    }
+
+    public void getGpuUsage() {
+        try {
+            System.out.println("=======================");
+            ProcessBuilder builder = new ProcessBuilder("nvidia-smi");
+            builder.redirectErrorStream(true);
+            Process p;
+            p = builder.start();
+            BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            Stream<String> lines = r.lines();
+        
+            lines.forEach(System.out::println);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        
     }
 
     // public OSProcess calculateProcessCpuUsage(OSProcess process){

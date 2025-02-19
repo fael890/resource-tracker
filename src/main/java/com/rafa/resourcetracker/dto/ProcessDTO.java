@@ -1,6 +1,6 @@
 package com.rafa.resourcetracker.dto;
 
-import com.rafa.resourcetracker.entity.Process;
+import com.rafa.resourcetracker.entity.ProcessEntity;
 
 import java.time.LocalDateTime;
 
@@ -16,7 +16,7 @@ public class ProcessDTO {
     private double networkUsage;
     private LocalDateTime timestamp;
 
-    public ProcessDTO(Process entity){
+    public ProcessDTO(ProcessEntity entity){
         BeanUtils.copyProperties(entity, this);
         // entity.getId(); 
         // entity.getName(); 

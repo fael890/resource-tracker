@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 
-public class Process {
+public class ProcessEntity {
     private int id;
     private String name;
     private double cpuUsage;
@@ -14,9 +14,9 @@ public class Process {
     private double networkUsage;
     private LocalDateTime timestamp;
 
-    public Process() { }
+    public ProcessEntity() { }
 
-    public Process(int id, String name, double cpuUsage, double gpuUsage, double memoryUsage, double diskUsage,
+    public ProcessEntity(int id, String name, double cpuUsage, double gpuUsage, double memoryUsage, double diskUsage,
             double networkUsage, LocalDateTime timestamp) {
         this.id = id;
         this.name = name;
@@ -93,7 +93,7 @@ public class Process {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Process other = (Process) obj;
+        ProcessEntity other = (ProcessEntity) obj;
         if (id != other.id)
             return false;
         return true;
