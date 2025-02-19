@@ -33,7 +33,7 @@ public class ProcessService {
                 process.getName(),
                 (process.getProcessCpuLoadBetweenTicks(process)*100d)/processor.getLogicalProcessorCount(),
                 0.0,
-                process.getResidentSetSize(),
+                process.getResidentSetSize() / (1024 * 1024),
                 0.0,
                 0.0,
                 null
