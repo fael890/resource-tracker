@@ -7,7 +7,13 @@ stompClient.onConnect = (frame) => {
     console.log('Connected: ' + frame);
     stompClient.subscribe('/topic/process', (message) => {
         let processList = JSON.parse(message.body);
-        let formattedText = processList.map(p => `Name: ${p.name}, CPU: ${p.cpuUsage}, RAM: ${p.memoryUsage} MB`).join('<br>');
+        let formattedText = processList.map(
+            p => `Name: ${p.name}, 
+            CPU: ${p.cpuUsage}, 
+            RAM: ${p.memoryUsage} MB, 
+            Disk Read: ${p.diskReadUsage}
+            Disk write: ${p.diskWriteUsage}`
+        ).join('<br>');
         document.getElementById("process").innerHTML = formattedText;
         //console.log("Nova mensagem recebida:", message.body);
     });

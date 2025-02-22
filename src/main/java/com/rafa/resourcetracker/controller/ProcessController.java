@@ -29,10 +29,19 @@ public class ProcessController {
 		this.template.convertAndSend("/topic/process", processList);
 	}
 
-    @GetMapping("/test")
+    @GetMapping("/testGpu")
     public void getGpuUsage() {
         try {
             processService.getGpuUsage();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @GetMapping("/testNetwork")
+    public void getNetworkUsage() {
+        try {
+            processService.getNetworkUsage(0);
         } catch (Exception e) {
             e.printStackTrace();
         }

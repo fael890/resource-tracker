@@ -12,7 +12,8 @@ public class ProcessDTO {
     private double cpuUsage;
     private double gpuUsage;
     private double memoryUsage;
-    private double diskUsage;
+    private double diskReadUsage;
+    private double diskWriteUsage;
     private double networkUsage;
     private LocalDateTime timestamp;
 
@@ -68,12 +69,20 @@ public class ProcessDTO {
         this.memoryUsage = memoryUsage;
     }
 
-    public double getDiskUsage() {
-        return diskUsage;
+    public double getDiskReadUsage() {
+        return diskReadUsage;
     }
 
-    public void setDiskUsage(double diskUsage) {
-        this.diskUsage = diskUsage;
+    public void setDiskReadUsage(double readDiskUsage) {
+        this.diskReadUsage = readDiskUsage;
+    }
+
+    public double getDiskWriteUsage() {
+        return diskWriteUsage;
+    }
+
+    public void setDiskWriteUsage(double writeDiskUsage) {
+        this.diskWriteUsage = writeDiskUsage;
     }
 
     public double getNetworkUsage() {

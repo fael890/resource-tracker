@@ -10,20 +10,22 @@ public class ProcessEntity {
     private double cpuUsage;
     private double gpuUsage;
     private double memoryUsage;
-    private double diskUsage;
+    private double diskReadUsage;
+    private double diskWriteUsage;
     private double networkUsage;
     private LocalDateTime timestamp;
 
     public ProcessEntity() { }
 
-    public ProcessEntity(int id, String name, double cpuUsage, double gpuUsage, double memoryUsage, double diskUsage,
+    public ProcessEntity(int id, String name, double cpuUsage, double gpuUsage, double memoryUsage, double diskReadUsage, double diskWriteUsage,
             double networkUsage, LocalDateTime timestamp) {
         this.id = id;
         this.name = name;
         this.cpuUsage = cpuUsage;
         this.gpuUsage = gpuUsage;
         this.memoryUsage = memoryUsage;
-        this.diskUsage = diskUsage;
+        this.diskReadUsage = diskReadUsage;
+        this.diskWriteUsage = diskWriteUsage;
         this.networkUsage = networkUsage;
         this.timestamp = timestamp;
     }
@@ -58,11 +60,17 @@ public class ProcessEntity {
     public void setMemoryUsage(double memoryUsage) {
         this.memoryUsage = memoryUsage;
     }
-    public double getDiskUsage() {
-        return diskUsage;
+    public double getDiskReadUsage() {
+        return diskReadUsage;
     }
-    public void setDiskUsage(double diskUsage) {
-        this.diskUsage = diskUsage;
+    public void setDiskReadUsage(double diskReadUsage) {
+        this.diskReadUsage = diskReadUsage;
+    }
+    public double getDiskWriteUsage() {
+        return diskWriteUsage;
+    }
+    public void setDiskWriteUsage(double diskWriteUsage) {
+        this.diskWriteUsage = diskWriteUsage;
     }
     public double getNetworkUsage() {
         return networkUsage;

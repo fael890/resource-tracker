@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 import org.springframework.stereotype.Service;
 import com.rafa.resourcetracker.dto.ProcessDTO;
 import com.rafa.resourcetracker.entity.ProcessEntity;
+
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.software.os.OSProcess;
@@ -16,11 +17,10 @@ import oshi.software.os.OperatingSystem;
 import oshi.software.os.OperatingSystem.ProcessSorting;
 
 @Service
-public class ProcessService {
+public class ProcessService{
     private SystemInfo systemInfo = new SystemInfo();
     private OperatingSystem os = systemInfo.getOperatingSystem();
     private CentralProcessor processor = systemInfo.getHardware().getProcessor();
-    //(process.getProcessCpuLoadCumulative()*100d)/processor.getLogicalProcessorCount(),
 
     public List<ProcessDTO> getProcessList(){
         List<OSProcess> osProcessList = os.getProcesses(null, ProcessSorting.CPU_DESC, 10);
@@ -33,8 +33,9 @@ public class ProcessService {
                 process.getName(),
                 (process.getProcessCpuLoadBetweenTicks(process)*100d)/processor.getLogicalProcessorCount(),
                 0.0,
-                process.getResidentSetSize() / (1024 * 1024),
-                0.0,
+                convertBytesToMB(process.getResidentSetSize()),
+                convertBytesToMB(process.getBytesRead()),
+                convertBytesToMB(process.getBytesWritten()),
                 0.0,
                 null
             )
@@ -62,12 +63,21 @@ public class ProcessService {
         
     }
 
-    // public OSProcess calculateProcessCpuUsage(OSProcess process){
-    //     int cpuNumber = processor.getLogicalProcessorCount();
-    //     double previousTime = 0;
+    public void getNetworkUsage(int pid){
+        try {
+            String command = "netstat -ano";
+            ProcessBuilder builder = new ProcessBuilder("powershell", "-Command", command);
+            Process p = builder.start();
+            BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            Stream<String> lines = r.lines();
+        
+            lines.forEach(System.out::println);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-    //     double currentTime = process.getKernelTime() + process.getUserTime();
-    //     double timeDifference = currentTime - previousTime;
-	// 	double cpu = (100d * (timeDifference / ((double) 1000))) / cpuNumber;
-    // }
+    public double convertBytesToMB(double value){
+        return value / (1024 * 1024);
+    }
 }
