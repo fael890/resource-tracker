@@ -3,7 +3,10 @@ package com.rafa.resourcetracker.service;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.springframework.stereotype.Service;
@@ -25,6 +28,7 @@ public class ProcessService{
     public List<ProcessDTO> getProcessList(){
         List<OSProcess> osProcessList = os.getProcesses(null, ProcessSorting.CPU_DESC, 10);
         List<ProcessDTO> processList;
+        LocalDateTime now = LocalDateTime.now();
         
         processList = osProcessList.stream()
         .map(
@@ -32,12 +36,12 @@ public class ProcessService{
                 process.getProcessID(), 
                 process.getName(),
                 (process.getProcessCpuLoadBetweenTicks(process)*100d)/processor.getLogicalProcessorCount(),
-                0.0,
+                getGpuUsage(),
                 convertBytesToMB(process.getResidentSetSize()),
                 convertBytesToMB(process.getBytesRead()),
                 convertBytesToMB(process.getBytesWritten()),
                 0.0,
-                null
+                now
             )
         )
         .map(entity -> new ProcessDTO(entity)).toList();
@@ -45,19 +49,23 @@ public class ProcessService{
         return processList;
     }
 
-    public void getGpuUsage() {
+    public String getGpuUsage() {
         try {
-            System.out.println("=======================");
-            ProcessBuilder builder = new ProcessBuilder("nvidia-smi");
+            ProcessBuilder builder = new ProcessBuilder("powershell", "-Command", "nvidia-smi --query-gpu=utilization.gpu,memory.used,memory.total,temperature.gpu --format=csv");
             builder.redirectErrorStream(true);
             Process p;
             p = builder.start();
             BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
             Stream<String> lines = r.lines();
-        
-            lines.forEach(System.out::println);
+
+            String result = lines.collect(Collectors.joining("\n"));
+
+            return result;
+            //lines.forEach(System.out::println);
+            
         } catch (IOException e) {
             e.printStackTrace();
+            return e.getMessage();
         }
 
         

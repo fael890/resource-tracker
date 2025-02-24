@@ -7,14 +7,18 @@ stompClient.onConnect = (frame) => {
     console.log('Connected: ' + frame);
     stompClient.subscribe('/topic/process', (message) => {
         let processList = JSON.parse(message.body);
+
         let formattedText = processList.map(
             p => `Name: ${p.name}, 
             CPU: ${p.cpuUsage}, 
             RAM: ${p.memoryUsage} MB, 
-            Disk Read: ${p.diskReadUsage}
-            Disk write: ${p.diskWriteUsage}`
+            Disk Read: ${p.diskReadUsage},
+            Disk write: ${p.diskWriteUsage}`,
         ).join('<br>');
+
+        document.getElementById("time").innerHTML = processList[0].timestamp;
         document.getElementById("process").innerHTML = formattedText;
+        document.getElementById("gpu-usage").innerHTML = processList[0].gpuUsage;
         //console.log("Nova mensagem recebida:", message.body);
     });
 };

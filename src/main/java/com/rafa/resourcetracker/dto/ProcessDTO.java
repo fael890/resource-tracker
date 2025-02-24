@@ -10,7 +10,7 @@ public class ProcessDTO {
     private Long id;
     private String name;
     private double cpuUsage;
-    private double gpuUsage;
+    private String gpuUsage;
     private double memoryUsage;
     private double diskReadUsage;
     private double diskWriteUsage;
@@ -53,11 +53,11 @@ public class ProcessDTO {
         this.cpuUsage = cpuUsage;
     }
 
-    public double getGpuUsage() {
+    public String getGpuUsage() {
         return gpuUsage;
     }
 
-    public void setGpuUsage(double gpuUsage) {
+    public void setGpuUsage(String gpuUsage) {
         this.gpuUsage = gpuUsage;
     }
 

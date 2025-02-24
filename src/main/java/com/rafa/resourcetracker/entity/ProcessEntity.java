@@ -8,7 +8,7 @@ public class ProcessEntity {
     private int id;
     private String name;
     private double cpuUsage;
-    private double gpuUsage;
+    private String gpuUsage;
     private double memoryUsage;
     private double diskReadUsage;
     private double diskWriteUsage;
@@ -17,7 +17,7 @@ public class ProcessEntity {
 
     public ProcessEntity() { }
 
-    public ProcessEntity(int id, String name, double cpuUsage, double gpuUsage, double memoryUsage, double diskReadUsage, double diskWriteUsage,
+    public ProcessEntity(int id, String name, double cpuUsage, String gpuUsage, double memoryUsage, double diskReadUsage, double diskWriteUsage,
             double networkUsage, LocalDateTime timestamp) {
         this.id = id;
         this.name = name;
@@ -48,10 +48,10 @@ public class ProcessEntity {
     public void setCpuUsage(double cpuUsage) {
         this.cpuUsage = cpuUsage;
     }
-    public double getGpuUsage() {
+    public String getGpuUsage() {
         return gpuUsage;
     }
-    public void setGpuUsage(double gpuUsage) {
+    public void setGpuUsage(String gpuUsage) {
         this.gpuUsage = gpuUsage;
     }
     public double getMemoryUsage() {
