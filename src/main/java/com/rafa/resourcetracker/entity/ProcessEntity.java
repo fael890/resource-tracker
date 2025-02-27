@@ -2,10 +2,8 @@ package com.rafa.resourcetracker.entity;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Entity;
-
 public class ProcessEntity {
-    private int id;
+    private int pid;
     private String name;
     private double cpuUsage;
     private String gpuUsage;
@@ -17,9 +15,9 @@ public class ProcessEntity {
 
     public ProcessEntity() { }
 
-    public ProcessEntity(int id, String name, double cpuUsage, String gpuUsage, double memoryUsage, double diskReadUsage, double diskWriteUsage,
+    public ProcessEntity(int pid, String name, double cpuUsage, String gpuUsage, double memoryUsage, double diskReadUsage, double diskWriteUsage,
             double networkUsage, LocalDateTime timestamp) {
-        this.id = id;
+        this.pid = pid;
         this.name = name;
         this.cpuUsage = cpuUsage;
         this.gpuUsage = gpuUsage;
@@ -30,11 +28,11 @@ public class ProcessEntity {
         this.timestamp = timestamp;
     }
 
-    public int getId() {
-        return id;
+    public int getPid() {
+        return pid;
     }
-    public void setId(int id) {
-        this.id = id;
+    public void setPid(int pid) {
+        this.pid = pid;
     }
     public String getName() {
         return name;
@@ -84,30 +82,5 @@ public class ProcessEntity {
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + id;
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        ProcessEntity other = (ProcessEntity) obj;
-        if (id != other.id)
-            return false;
-        return true;
-    }
-
-   
-
     
 }

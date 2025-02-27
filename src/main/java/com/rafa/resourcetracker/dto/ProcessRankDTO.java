@@ -2,9 +2,7 @@ package com.rafa.resourcetracker.dto;
 
 import java.time.LocalDateTime;
 
-import org.springframework.beans.BeanUtils;
-
-import com.rafa.resourcetracker.entity.ProcessRank;
+import com.rafa.resourcetracker.entity.ProcessRankEntity;
 
 public class ProcessRankDTO {
     private Long id;
@@ -18,8 +16,24 @@ public class ProcessRankDTO {
     
     public ProcessRankDTO() { }
 
-    public ProcessRankDTO(ProcessRank entity) {
-        BeanUtils.copyProperties(entity, this);
+    public ProcessRankDTO(ProcessDTO entity) {
+        this.pid = entity.getPid();
+        this.name = entity.getName();
+        this.cpuUsage = entity.getCpuUsage();
+        this.memoryUsage = entity.getMemoryUsage();
+        this.diskReadUsage = entity.getDiskReadUsage();
+        this.diskWriteUsage = entity.getDiskWriteUsage();
+        this.lastUpdate = LocalDateTime.now();
+    }
+
+    public ProcessRankDTO(ProcessRankEntity entity) {
+        this.pid = entity.getPid();
+        this.name = entity.getName();
+        this.cpuUsage = entity.getCpuUsage();
+        this.memoryUsage = entity.getMemoryUsage();
+        this.diskReadUsage = entity.getDiskReadUsage();
+        this.diskWriteUsage = entity.getDiskWriteUsage();
+        this.lastUpdate = LocalDateTime.now();
     }
 
     public Long getId() {

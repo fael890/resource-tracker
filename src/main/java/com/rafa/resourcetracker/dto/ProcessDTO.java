@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import org.springframework.beans.BeanUtils;
 
 public class ProcessDTO {
-    private Long id;
+    private int pid;
     private String name;
     private double cpuUsage;
     private String gpuUsage;
@@ -19,22 +19,14 @@ public class ProcessDTO {
 
     public ProcessDTO(ProcessEntity entity){
         BeanUtils.copyProperties(entity, this);
-        // entity.getId(); 
-        // entity.getName(); 
-        // entity.getCpuUsage(); 
-        // entity.getGpuUsage(); 
-        // entity.getMemoryUsage(); 
-        // entity.getDiskUsage(); 
-        // entity.getNetworkUsage(); 
-        // entity.getTimestamp();
     }
 
-    public Long getId() {
-        return id;
+    public int getPid() {
+        return pid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPid(int pid) {
+        this.pid = pid;
     }
 
     public String getName() {

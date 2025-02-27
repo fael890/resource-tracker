@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "process_rank")
-public class ProcessRank {
+public class ProcessRankEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,7 +24,20 @@ public class ProcessRank {
     private double diskWriteUsage;
     private LocalDateTime lastUpdate;
 
-    public ProcessRank(){ }
+    public ProcessRankEntity(){ }
+    
+
+    public ProcessRankEntity(int pid, String name, double cpuUsage, double memoryUsage, double diskReadUsage,
+            double diskWriteUsage, LocalDateTime lastUpdate) {
+        this.pid = pid;
+        this.name = name;
+        this.cpuUsage = cpuUsage;
+        this.memoryUsage = memoryUsage;
+        this.diskReadUsage = diskReadUsage;
+        this.diskWriteUsage = diskWriteUsage;
+        this.lastUpdate = lastUpdate;
+    }
+
 
     public Long getId() {
         return id;
@@ -91,7 +104,7 @@ public class ProcessRank {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        ProcessRank other = (ProcessRank) obj;
+        ProcessRankEntity other = (ProcessRankEntity) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
