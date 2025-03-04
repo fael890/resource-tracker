@@ -1,11 +1,16 @@
 package com.rafa.resourcetracker.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.rafa.resourcetracker.dto.ProcessDTO;
 import com.rafa.resourcetracker.dto.ProcessRankDTO;
@@ -20,7 +25,7 @@ public class ProcessRankService {
     @Autowired
     private ProcessService processService;
 
-    
+    @Transactional
     public List<ProcessRankDTO> updateProcessRank(){
         List<ProcessDTO> processListDto = processService.getProcessList();
         List<ProcessRankEntity> processRank = processRankRepository.findAll();
@@ -37,15 +42,70 @@ public class ProcessRankService {
 
         processRank.sort(Comparator.comparing(ProcessRankEntity::getCpuUsage).reversed());
 
-        System.out.println(processRank.get(0));
-        System.out.println("=======================================");
-        System.out.println(processRankRepository.save(processRank.get(0)));
-        System.out.println("=======================================");
+        Map<String, Integer> tempHash = new HashMap<>();
+        List<ProcessRankEntity> tempFilteredProcessRankList = new ArrayList();
+
+        for (ProcessRankEntity process : processRank) {
+            if (!tempHash.containsKey(process.getName())) {
+                tempHash.put(process.getName(), 0);
+                tempFilteredProcessRankList.add(process);
+            } 
+        }
+
+        processRank.clear();
+        processRank.addAll(tempFilteredProcessRankList);
+
+        Long id = 1L;
+        for (ProcessRankEntity process : processRank) {
+            if (processRankRepository.existsById(id)) {
+                updateProcessByIdInProcessRank(id, process);
+            } else {
+                processRankRepository.save(process);
+            }
+            if(processRankRepository.existsByName(process.getName())){
+                updateProcessByIdInProcessRank(process.getName(), process);
+                
+            }
+            id++;
+        }
 
         List<ProcessRankDTO> processRankDto = processRank.stream().map(p -> new ProcessRankDTO(p)).toList();
 
         return processRankDto;
     }
+
+    @Transactional
+    public void updateProcessByIdInProcessRank(Long id, ProcessRankEntity process) {
+        processRankRepository.updateById(
+            id,
+            process.getPid(), 
+            process.getName(), 
+            process.getCpuUsage(), 
+            process.getMemoryUsage(), 
+            process.getDiskReadUsage(), 
+            process.getDiskWriteUsage(), 
+            LocalDateTime.now()
+            );
+    }
+
+    @Transactional
+    public void updateProcessByIdInProcessRank(String name, ProcessRankEntity process) {
+        processRankRepository.updateByName(
+            process.getPid(), 
+            name, 
+            process.getCpuUsage(), 
+            process.getMemoryUsage(), 
+            process.getDiskReadUsage(), 
+            process.getDiskWriteUsage(), 
+            LocalDateTime.now()
+            );
+    }
+
+    // public void updateProcessRank(){
+    //     ProcessRankEntity test = new ProcessRankEntity(1234, "Teste", 70.0, 2100.0, 50.0, 55.0, LocalDateTime.now());
+    //     System.out.println("=======================================");
+    //     processRankRepository.save(test);
+    // }
 
     public List<ProcessRankEntity> test(){
         List<ProcessRankEntity> processRank = processRankRepository.findAllOrderByCpuUsage();

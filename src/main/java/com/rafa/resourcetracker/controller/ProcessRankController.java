@@ -21,6 +21,11 @@ public class ProcessRankController {
         return processRankDto;
     }
 
+    // @GetMapping("/processRank")
+    // public void updateRank() {
+    //     processRankService.updateProcessRank();
+    // }
+
     @GetMapping("/testOrderBy")
     public List<ProcessRankEntity> getProcessRank() {
         List<ProcessRankEntity> processRank = processRankService.test();
