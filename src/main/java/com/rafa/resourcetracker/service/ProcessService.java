@@ -29,7 +29,6 @@ public class ProcessService{
         List<OSProcess> osProcessList = os.getProcesses(null, ProcessSorting.CPU_DESC, 10);
         List<ProcessDTO> processList;
         LocalDateTime now = LocalDateTime.now();
-        
         processList = osProcessList.stream()
         .map(
             process -> new ProcessEntity(
@@ -42,7 +41,7 @@ public class ProcessService{
                 convertBytesToMB(process.getBytesWritten()),
                 0.0,
                 now
-            )
+            ) 
         )
         .map(entity -> new ProcessDTO(entity)).toList();
 
@@ -59,27 +58,22 @@ public class ProcessService{
             Stream<String> lines = r.lines();
 
             String result = lines.collect(Collectors.joining("\n"));
-
             return result;
-            //lines.forEach(System.out::println);
             
         } catch (IOException e) {
             e.printStackTrace();
             return e.getMessage();
         }
-
-        
     }
 
     public void getNetworkUsage(int pid){
+        //System.out.println("HERE1");
         try {
             String command = "netstat -ano";
             ProcessBuilder builder = new ProcessBuilder("powershell", "-Command", command);
             Process p = builder.start();
             BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
             Stream<String> lines = r.lines();
-        
-            lines.forEach(System.out::println);
         } catch (Exception e) {
             e.printStackTrace();
         }
