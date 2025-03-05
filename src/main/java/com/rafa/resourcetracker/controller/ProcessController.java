@@ -22,10 +22,8 @@ public class ProcessController {
 
     @Scheduled(fixedDelay=1000)
 	public void updateProcessList() {
-        System.out.println("\nHERE1");
         List<ProcessDTO> processList = processService.getProcessList();
 		this.template.convertAndSend("/topic/process", processList);
-        System.out.println("HERE2\n");
 	}
 
     @GetMapping("/testGpu")

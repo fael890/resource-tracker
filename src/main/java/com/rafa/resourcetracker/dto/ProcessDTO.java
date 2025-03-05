@@ -11,7 +11,7 @@ public class ProcessDTO {
     private String name;
     private double cpuUsage;
     private String gpuUsage;
-    private double memoryUsage;
+    private double ramUsage;
     private double diskReadUsage;
     private double diskWriteUsage;
     private double networkUsage;
@@ -53,12 +53,12 @@ public class ProcessDTO {
         this.gpuUsage = gpuUsage;
     }
 
-    public double getMemoryUsage() {
-        return memoryUsage;
+    public double getRamUsage() {
+        return ramUsage;
     }
 
-    public void setMemoryUsage(double memoryUsage) {
-        this.memoryUsage = memoryUsage;
+    public void setRamUsage(double ramUsage) {
+        this.ramUsage = ramUsage;
     }
 
     public double getDiskReadUsage() {

@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +33,7 @@ public class ProcessRankService {
             p.getPid(), 
             p.getName(), 
             p.getCpuUsage(), 
-            p.getMemoryUsage(), 
+            p.getRamUsage(), 
             p.getDiskReadUsage(), 
             p.getDiskWriteUsage(), 
             LocalDateTime.now()
@@ -43,7 +42,7 @@ public class ProcessRankService {
         processRank.sort(Comparator.comparing(ProcessRankEntity::getCpuUsage).reversed());
 
         Map<String, Integer> tempHash = new HashMap<>();
-        List<ProcessRankEntity> tempFilteredProcessRankList = new ArrayList();
+        List<ProcessRankEntity> tempFilteredProcessRankList = new ArrayList<>();
 
         for (ProcessRankEntity process : processRank) {
             if (!tempHash.containsKey(process.getName())) {
@@ -81,7 +80,7 @@ public class ProcessRankService {
             process.getPid(), 
             process.getName(), 
             process.getCpuUsage(), 
-            process.getMemoryUsage(), 
+            process.getRamUsage(), 
             process.getDiskReadUsage(), 
             process.getDiskWriteUsage(), 
             LocalDateTime.now()
@@ -94,18 +93,12 @@ public class ProcessRankService {
             process.getPid(), 
             name, 
             process.getCpuUsage(), 
-            process.getMemoryUsage(), 
+            process.getRamUsage(), 
             process.getDiskReadUsage(), 
             process.getDiskWriteUsage(), 
             LocalDateTime.now()
             );
     }
-
-    // public void updateProcessRank(){
-    //     ProcessRankEntity test = new ProcessRankEntity(1234, "Teste", 70.0, 2100.0, 50.0, 55.0, LocalDateTime.now());
-    //     System.out.println("=======================================");
-    //     processRankRepository.save(test);
-    // }
 
     public List<ProcessRankEntity> test(){
         List<ProcessRankEntity> processRank = processRankRepository.findAllOrderByCpuUsage();

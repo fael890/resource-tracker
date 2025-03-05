@@ -19,7 +19,7 @@ public class ProcessRankEntity {
     @Column(columnDefinition = "TEXT")
     private String name;
     private double cpuUsage;
-    private double memoryUsage;
+    private double ramUsage;
     private double diskReadUsage;
     private double diskWriteUsage;
     private LocalDateTime lastUpdate;
@@ -27,12 +27,12 @@ public class ProcessRankEntity {
     public ProcessRankEntity(){ }
     
 
-    public ProcessRankEntity(int pid, String name, double cpuUsage, double memoryUsage, double diskReadUsage,
+    public ProcessRankEntity(int pid, String name, double cpuUsage, double ramUsage, double diskReadUsage,
             double diskWriteUsage, LocalDateTime lastUpdate) {
         this.pid = pid;
         this.name = name;
         this.cpuUsage = cpuUsage;
-        this.memoryUsage = memoryUsage;
+        this.ramUsage = ramUsage;
         this.diskReadUsage = diskReadUsage;
         this.diskWriteUsage = diskWriteUsage;
         this.lastUpdate = lastUpdate;
@@ -63,11 +63,11 @@ public class ProcessRankEntity {
     public void setCpuUsage(double cpuUsage) {
         this.cpuUsage = cpuUsage;
     }
-    public double getMemoryUsage() {
-        return memoryUsage;
+    public double getRamUsage() {
+        return ramUsage;
     }
-    public void setMemoryUsage(double memoryUsage) {
-        this.memoryUsage = memoryUsage;
+    public void setRamUsage(double ramUsage) {
+        this.ramUsage = ramUsage;
     }
     public double getDiskReadUsage() {
         return diskReadUsage;

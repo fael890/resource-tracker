@@ -3,7 +3,6 @@ package com.rafa.resourcetracker.service;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -67,13 +66,11 @@ public class ProcessService{
     }
 
     public void getNetworkUsage(int pid){
-        //System.out.println("HERE1");
         try {
             String command = "netstat -ano";
             ProcessBuilder builder = new ProcessBuilder("powershell", "-Command", command);
             Process p = builder.start();
             BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            Stream<String> lines = r.lines();
         } catch (Exception e) {
             e.printStackTrace();
         }

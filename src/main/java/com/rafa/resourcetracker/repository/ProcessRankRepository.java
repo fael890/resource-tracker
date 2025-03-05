@@ -26,7 +26,7 @@ public interface ProcessRankRepository extends JpaRepository<ProcessRankEntity, 
         int pid, 
         String name, 
         double cpuUsage, 
-        double memoryUsage, 
+        double ramUsage, 
         double diskReadUsage,
         double diskWriteUsage, 
         LocalDateTime lastUpdate
@@ -35,13 +35,13 @@ public interface ProcessRankRepository extends JpaRepository<ProcessRankEntity, 
     @Modifying
     @Query(
         nativeQuery=true,
-        value = "UPDATE PROCESS_RANK SET PID=:pid, NAME=:name, CPU_USAGE=:cpuUsage, MEMORY_USAGE=:memoryUsage, DISK_READ_USAGE=:diskReadUsage,DISK_WRITE_USAGE=:diskWriteUsage, LAST_UPDATE=:lastUpdate WHERE NAME = :name "
+        value = "UPDATE PROCESS_RANK SET PID=:pid, NAME=:name, CPU_USAGE=:cpuUsage, MEMORY_USAGE=:ramUsage, DISK_READ_USAGE=:diskReadUsage,DISK_WRITE_USAGE=:diskWriteUsage, LAST_UPDATE=:lastUpdate WHERE NAME = :name "
     )
     void updateByName(
         int pid, 
         String name, 
         double cpuUsage, 
-        double memoryUsage, 
+        double ramUsage, 
         double diskReadUsage,
         double diskWriteUsage, 
         LocalDateTime lastUpdate
