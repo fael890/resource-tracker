@@ -34,7 +34,7 @@ public class ProcessService{
                 process.getProcessID(), 
                 process.getName(),
                 (process.getProcessCpuLoadBetweenTicks(process)*100d)/processor.getLogicalProcessorCount(),
-                getGpuUsage(),
+                "",
                 convertBytesToMB(process.getResidentSetSize()),
                 convertBytesToMB(process.getBytesRead()),
                 convertBytesToMB(process.getBytesWritten()),
@@ -47,23 +47,9 @@ public class ProcessService{
         return processList;
     }
 
-    public String getGpuUsage() {
-        try {
-            ProcessBuilder builder = new ProcessBuilder("powershell", "-Command", "nvidia-smi --query-gpu=utilization.gpu,memory.used,memory.total,temperature.gpu --format=csv");
-            builder.redirectErrorStream(true);
-            Process p;
-            p = builder.start();
-            BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            Stream<String> lines = r.lines();
-
-            String result = lines.collect(Collectors.joining("\n"));
-            return result;
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-            return e.getMessage();
-        }
-    }
+    // public String getGpuUsage() {
+        
+    // }
 
     public void getNetworkUsage(int pid){
         try {

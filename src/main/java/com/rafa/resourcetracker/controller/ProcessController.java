@@ -29,7 +29,7 @@ public class ProcessController {
     @GetMapping("/testGpu")
     public void getGpuUsage() {
         try {
-            processService.getGpuUsage();
+            //processService.getGpuUsage();
         } catch (Exception e) {
             e.printStackTrace();
         }
