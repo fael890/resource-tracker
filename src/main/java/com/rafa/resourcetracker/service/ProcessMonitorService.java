@@ -31,32 +31,15 @@ public class ProcessMonitorService{
                 process.getProcessID(), 
                 process.getName(),
                 (process.getProcessCpuLoadBetweenTicks(process)*100d)/processor.getLogicalProcessorCount(),
-                "",
                 convertBytesToMB(process.getResidentSetSize()),
                 convertBytesToMB(process.getBytesRead()),
                 convertBytesToMB(process.getBytesWritten()),
-                0.0,
                 now
             ) 
         )
         .map(entity -> new ProcessDTO(entity)).toList();
 
         return processList;
-    }
-
-    // public String getGpuUsage() {
-        
-    // }
-
-    public void getNetworkUsage(int pid){
-        try {
-            String command = "netstat -ano";
-            ProcessBuilder builder = new ProcessBuilder("powershell", "-Command", command);
-            Process p = builder.start();
-            BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public double convertBytesToMB(double value){

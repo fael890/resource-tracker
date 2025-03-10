@@ -6,25 +6,20 @@ public class ProcessEntity {
     private int pid;
     private String name;
     private double cpuUsage;
-    private String gpuUsage;
     private double ramUsage;
     private double diskReadUsage;
     private double diskWriteUsage;
-    private double networkUsage;
     private LocalDateTime timestamp;
 
     public ProcessEntity() { }
 
-    public ProcessEntity(int pid, String name, double cpuUsage, String gpuUsage, double ramUsage, double diskReadUsage, double diskWriteUsage,
-            double networkUsage, LocalDateTime timestamp) {
+    public ProcessEntity(int pid, String name, double cpuUsage, double ramUsage, double diskReadUsage, double diskWriteUsage, LocalDateTime timestamp) {
         this.pid = pid;
         this.name = name;
         this.cpuUsage = cpuUsage;
-        this.gpuUsage = gpuUsage;
         this.ramUsage = ramUsage;
         this.diskReadUsage = diskReadUsage;
         this.diskWriteUsage = diskWriteUsage;
-        this.networkUsage = networkUsage;
         this.timestamp = timestamp;
     }
 
@@ -46,12 +41,6 @@ public class ProcessEntity {
     public void setCpuUsage(double cpuUsage) {
         this.cpuUsage = cpuUsage;
     }
-    public String getGpuUsage() {
-        return gpuUsage;
-    }
-    public void setGpuUsage(String gpuUsage) {
-        this.gpuUsage = gpuUsage;
-    }
     public double getRamUsage() {
         return ramUsage;
     }
@@ -69,12 +58,6 @@ public class ProcessEntity {
     }
     public void setDiskWriteUsage(double diskWriteUsage) {
         this.diskWriteUsage = diskWriteUsage;
-    }
-    public double getNetworkUsage() {
-        return networkUsage;
-    }
-    public void setNetworkUsage(double networkUsage) {
-        this.networkUsage = networkUsage;
     }
     public LocalDateTime getTimestamp() {
         return timestamp;

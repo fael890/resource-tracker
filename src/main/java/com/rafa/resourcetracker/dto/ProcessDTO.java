@@ -10,11 +10,9 @@ public class ProcessDTO {
     private int pid;
     private String name;
     private double cpuUsage;
-    private String gpuUsage;
     private double ramUsage;
     private double diskReadUsage;
     private double diskWriteUsage;
-    private double networkUsage;
     private LocalDateTime timestamp;
 
     public ProcessDTO(ProcessEntity entity){
@@ -45,14 +43,6 @@ public class ProcessDTO {
         this.cpuUsage = cpuUsage;
     }
 
-    public String getGpuUsage() {
-        return gpuUsage;
-    }
-
-    public void setGpuUsage(String gpuUsage) {
-        this.gpuUsage = gpuUsage;
-    }
-
     public double getRamUsage() {
         return ramUsage;
     }
@@ -75,14 +65,6 @@ public class ProcessDTO {
 
     public void setDiskWriteUsage(double writeDiskUsage) {
         this.diskWriteUsage = writeDiskUsage;
-    }
-
-    public double getNetworkUsage() {
-        return networkUsage;
-    }
-
-    public void setNetworkUsage(double networkUsage) {
-        this.networkUsage = networkUsage;
     }
 
     public LocalDateTime getTimestamp() {
