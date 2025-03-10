@@ -22,7 +22,7 @@ public class ProcessRankService {
     private ProcessRankRepository processRankRepository;
 
     @Autowired
-    private ProcessService processService;
+    private ProcessMonitorService processService;
 
     @Transactional
     public List<ProcessRankDTO> updateProcessRank(){

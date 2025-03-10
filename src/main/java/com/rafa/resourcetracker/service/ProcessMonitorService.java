@@ -1,12 +1,9 @@
 package com.rafa.resourcetracker.service;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.stereotype.Service;
 import com.rafa.resourcetracker.dto.ProcessDTO;
@@ -19,7 +16,7 @@ import oshi.software.os.OperatingSystem;
 import oshi.software.os.OperatingSystem.ProcessSorting;
 
 @Service
-public class ProcessService{
+public class ProcessMonitorService{
     private SystemInfo systemInfo = new SystemInfo();
     private OperatingSystem os = systemInfo.getOperatingSystem();
     private CentralProcessor processor = systemInfo.getHardware().getProcessor();
