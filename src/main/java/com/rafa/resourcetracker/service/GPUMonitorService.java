@@ -18,10 +18,10 @@ public class GPUMonitorService {
 
             try(BufferedReader r = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
                 String line = r.readLine();
+                line = r.readLine();
                 if(line == null) {
                     throw new IOException("nvidia-smi returns null");
                 }
-
                 String[] result = line.split(",");
                 if(result.length < 4){
                     throw new IOException("nividia-smi returns irregular data");
