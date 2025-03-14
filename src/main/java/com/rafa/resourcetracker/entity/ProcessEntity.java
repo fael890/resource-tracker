@@ -1,6 +1,7 @@
 package com.rafa.resourcetracker.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class ProcessEntity {
     private int pid;
@@ -9,17 +10,19 @@ public class ProcessEntity {
     private double ramUsage;
     private double diskReadUsage;
     private double diskWriteUsage;
+    private List<ProcessEntity> childProcesses;
     private LocalDateTime timestamp;
 
     public ProcessEntity() { }
 
-    public ProcessEntity(int pid, String name, double cpuUsage, double ramUsage, double diskReadUsage, double diskWriteUsage, LocalDateTime timestamp) {
+    public ProcessEntity(int pid, String name, double cpuUsage, double ramUsage, double diskReadUsage, double diskWriteUsage, List<ProcessEntity> childProcesses, LocalDateTime timestamp) {
         this.pid = pid;
         this.name = name;
         this.cpuUsage = cpuUsage;
         this.ramUsage = ramUsage;
         this.diskReadUsage = diskReadUsage;
         this.diskWriteUsage = diskWriteUsage;
+        this.childProcesses = childProcesses;
         this.timestamp = timestamp;
     }
 
@@ -64,6 +67,12 @@ public class ProcessEntity {
     }
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
+    }
+    public List<ProcessEntity> getChildProcesses() {
+        return childProcesses;
+    }
+    public void setChildProcesses(List<ProcessEntity> childProcesses) {
+        this.childProcesses = childProcesses;
     }
     
 }

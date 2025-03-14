@@ -1,10 +1,7 @@
 package com.rafa.resourcetracker.dto;
 
-import com.rafa.resourcetracker.entity.ProcessEntity;
-
 import java.time.LocalDateTime;
-
-import org.springframework.beans.BeanUtils;
+import java.util.List;
 
 public class ProcessDTO {
     private int pid;
@@ -14,9 +11,29 @@ public class ProcessDTO {
     private double diskReadUsage;
     private double diskWriteUsage;
     private LocalDateTime timestamp;
+    private List<ProcessDTO> childProcesses;
 
-    public ProcessDTO(ProcessEntity entity){
-        BeanUtils.copyProperties(entity, this);
+    public ProcessDTO(int pid, String name, double cpuUsage, double ramUsage, double diskReadUsage,
+            double diskWriteUsage, LocalDateTime timestamp) {
+        this.pid = pid;
+        this.name = name;
+        this.cpuUsage = cpuUsage;
+        this.ramUsage = ramUsage;
+        this.diskReadUsage = diskReadUsage;
+        this.diskWriteUsage = diskWriteUsage;
+        this.timestamp = timestamp;
+    }
+
+    public ProcessDTO(int pid, String name, double cpuUsage, double ramUsage, double diskReadUsage,
+            double diskWriteUsage, LocalDateTime timestamp, List<ProcessDTO> childProcesses) {
+        this.pid = pid;
+        this.name = name;
+        this.cpuUsage = cpuUsage;
+        this.ramUsage = ramUsage;
+        this.diskReadUsage = diskReadUsage;
+        this.diskWriteUsage = diskWriteUsage;
+        this.timestamp = timestamp;
+        this.childProcesses = childProcesses;
     }
 
     public int getPid() {
@@ -73,6 +90,14 @@ public class ProcessDTO {
 
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public List<ProcessDTO> getChildProcesses() {
+        return childProcesses;
+    }
+
+    public void setChildProcesses(List<ProcessDTO> childProcesses) {
+        this.childProcesses = childProcesses;
     }
 
     

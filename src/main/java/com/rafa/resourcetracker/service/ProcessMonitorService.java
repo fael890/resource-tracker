@@ -3,6 +3,7 @@ package com.rafa.resourcetracker.service;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -22,27 +23,83 @@ public class ProcessMonitorService{
     private CentralProcessor processor = systemInfo.getHardware().getProcessor();
 
     public List<ProcessDTO> getProcessList(){
-        List<OSProcess> osProcessList = os.getProcesses(null, ProcessSorting.CPU_DESC, 10);
+        List<OSProcess> osProcessList = os.getProcesses(null, ProcessSorting.RSS_DESC, 20);
         List<ProcessDTO> processList;
+
         LocalDateTime now = LocalDateTime.now();
         processList = osProcessList.stream()
         .map(
-            process -> new ProcessEntity(
+            process -> new ProcessDTO(
                 process.getProcessID(), 
                 process.getName(),
                 (process.getProcessCpuLoadBetweenTicks(process)*100d)/processor.getLogicalProcessorCount(),
                 convertBytesToMB(process.getResidentSetSize()),
                 convertBytesToMB(process.getBytesRead()),
                 convertBytesToMB(process.getBytesWritten()),
-                now
+                now,
+                getChildProcessList(process)
             ) 
-        )
-        .map(entity -> new ProcessDTO(entity)).toList();
+        ).toList();
+        //.map(entity -> new ProcessDTO(entity)).toList();
 
         return processList;
     }
 
     public double convertBytesToMB(double value){
         return value / (1024 * 1024);
+    }
+
+    public List<ProcessDTO> getChildProcessList(OSProcess process){
+        List<OSProcess> childProcesses = os.getDescendantProcesses(process.getProcessID(), null, null, 0);
+        List<ProcessDTO> childProcessesDTO;
+        LocalDateTime now = LocalDateTime.now();
+        childProcessesDTO = childProcesses.stream().map(
+            cp -> new ProcessDTO(
+                cp.getProcessID(),
+                cp.getName(),
+                (cp.getProcessCpuLoadBetweenTicks(cp)*100d)/processor.getLogicalProcessorCount(),
+                convertBytesToMB(cp.getResidentSetSize()),
+                convertBytesToMB(cp.getBytesRead()),
+                convertBytesToMB(cp.getBytesWritten()),
+                now
+            )
+        ).toList();
+
+        return childProcessesDTO;
+    }
+
+    public void test(){
+        OSProcess process = os.getProcess(11120);
+        System.out.println(process.getName());
+
+        List<OSProcess> processes = os.getChildProcesses(process.getProcessID(), null, null, 0);
+        System.out.println(processes);
+
+        for (OSProcess p : processes) {
+            System.out.println(
+                p.getProcessID() + ", " +
+                p.getName() + ", " +
+                p.getResidentSetSize() + ", "
+            );
+        }
+
+        // processes.forEach(
+        //     p -> System.out.println(
+        //         p.getProcessID() + ", " +
+        //         p.getName() + ", " +
+        //         p.getResidentSetSize() + ", "
+        //     )
+        // );
+
+        // System.out.println(process.getName());
+        // int process2id = process.getParentProcessID();
+        // OSProcess process2 = os.getProcess(process2id);
+        // System.out.println(process2.getName());
+
+        // while (parentesesId != 0) {
+        //     System.out.println(process.getName() + ", " + process.getProcessID() + ", " + convertBytesToMB(process.getResidentSetSize()) + "\n");
+        //     process = os.getProcess(parentesesId);
+        //     parentesesId = process.getParentProcessID();
+        // }
     }
 }
