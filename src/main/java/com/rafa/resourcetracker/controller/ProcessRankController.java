@@ -26,8 +26,6 @@ public class ProcessRankController {
     @Async
 	public void updateProcessList() {
         processRankService.updateProcessRank();
-
-		//this.template.convertAndSend("/topic/process", processRank);
 	}
 
     @GetMapping("/processRank")
@@ -35,11 +33,6 @@ public class ProcessRankController {
         List<ProcessRankDTO> processRankDto = processRankService.updateProcessRank();
         return processRankDto;
     }
-
-    // @GetMapping("/processRank")
-    // public void updateRank() {
-    //     processRankService.updateProcessRank();
-    // }
 
     @GetMapping("/testOrderBy")
     public List<ProcessRankEntity> getProcessRank() {

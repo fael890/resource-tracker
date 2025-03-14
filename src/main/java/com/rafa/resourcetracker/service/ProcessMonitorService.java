@@ -40,7 +40,6 @@ public class ProcessMonitorService{
                 getChildProcessList(process)
             ) 
         ).toList();
-        //.map(entity -> new ProcessDTO(entity)).toList();
 
         return processList;
     }
@@ -68,38 +67,5 @@ public class ProcessMonitorService{
         return childProcessesDTO;
     }
 
-    public void test(){
-        OSProcess process = os.getProcess(11120);
-        System.out.println(process.getName());
-
-        List<OSProcess> processes = os.getChildProcesses(process.getProcessID(), null, null, 0);
-        System.out.println(processes);
-
-        for (OSProcess p : processes) {
-            System.out.println(
-                p.getProcessID() + ", " +
-                p.getName() + ", " +
-                p.getResidentSetSize() + ", "
-            );
-        }
-
-        // processes.forEach(
-        //     p -> System.out.println(
-        //         p.getProcessID() + ", " +
-        //         p.getName() + ", " +
-        //         p.getResidentSetSize() + ", "
-        //     )
-        // );
-
-        // System.out.println(process.getName());
-        // int process2id = process.getParentProcessID();
-        // OSProcess process2 = os.getProcess(process2id);
-        // System.out.println(process2.getName());
-
-        // while (parentesesId != 0) {
-        //     System.out.println(process.getName() + ", " + process.getProcessID() + ", " + convertBytesToMB(process.getResidentSetSize()) + "\n");
-        //     process = os.getProcess(parentesesId);
-        //     parentesesId = process.getParentProcessID();
-        // }
-    }
+    
 }
