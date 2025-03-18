@@ -22,11 +22,11 @@ public class ProcessRankController {
     @Autowired
     private SimpMessagingTemplate template;
 
-    @Scheduled(fixedDelay=30000)
-    @Async
-	public void updateProcessList() {
-        processRankService.updateProcessRank();
-	}
+    // @Scheduled(fixedDelay=30000)
+    // @Async
+	// public void updateProcessList() {
+    //     processRankService.updateProcessRank();
+	// }
 
     @GetMapping("/processRank")
     public List<ProcessRankDTO> updateRank() {
