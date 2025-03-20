@@ -1,16 +1,10 @@
 package com.rafa.resourcetracker.service;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.time.LocalDateTime;
-import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.function.Predicate;
 
 import org.springframework.stereotype.Service;
 import com.rafa.resourcetracker.dto.ProcessDTO;
-import com.rafa.resourcetracker.entity.ProcessEntity;
 
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
@@ -28,7 +22,7 @@ public class ProcessMonitorService{
     private int numberOfLogicalCPU = processor.getLogicalProcessorCount();
 
     public List<ProcessDTO> fetchProcessList(){
-        List<OSProcess> osProcessList = os.getProcesses(null, ProcessSorting.CPU_DESC, 20);
+        List<OSProcess> osProcessList = os.getProcesses(null, ProcessSorting.CPU_DESC, 30);
         LocalDateTime timestamp = LocalDateTime.now();
 
         try {
@@ -68,23 +62,4 @@ public class ProcessMonitorService{
 
         return (cpuUsage / this.numberOfLogicalCPU) * 100;
     }
-
-    // public List<ProcessDTO> getChildProcessList(OSProcess process){
-    //     List<OSProcess> childProcesses = os.getDescendantProcesses(process.getProcessID(), null, null, 0);
-    //     List<ProcessDTO> childProcessesDTO;
-    //     LocalDateTime now = LocalDateTime.now();
-    //     childProcessesDTO = childProcesses.stream().map(
-    //         cp -> new ProcessDTO(
-    //             cp.getProcessID(),
-    //             cp.getName(),
-    //             (cp.getProcessCpuLoadBetweenTicks(cp)*100d)/processor.getLogicalProcessorCount(),
-    //             convertBytesToMB(cp.getResidentSetSize()),
-    //             convertBytesToMB(cp.getBytesRead()),
-    //             convertBytesToMB(cp.getBytesWritten()),
-    //             now
-    //         )
-    //     ).toList();
-
-    //     return childProcessesDTO;
-    // }
 }

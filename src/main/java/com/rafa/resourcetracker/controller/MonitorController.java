@@ -2,6 +2,7 @@ package com.rafa.resourcetracker.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rafa.resourcetracker.dto.GPUMonitorDTO;
 import com.rafa.resourcetracker.dto.MonitorDTO;
 import com.rafa.resourcetracker.dto.ProcessDTO;
 import com.rafa.resourcetracker.service.GPUMonitorService;
@@ -14,7 +15,6 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -40,4 +40,8 @@ public class MonitorController {
         return processService.getProcessList();
     }
     
+    @GetMapping("/testGpuMonitor")
+    public GPUMonitorDTO getGpuMonitor() {
+        return gpuMonitorService.nvidiaGpuUsageMonitor();
+    }
 }
