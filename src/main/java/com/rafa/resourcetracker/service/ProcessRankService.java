@@ -73,6 +73,12 @@ public class ProcessRankService {
         return processRankDto;
     }
 
+    public List<ProcessRankDTO> getAllProcesses(){
+        List<ProcessRankEntity> processList = processRankRepository.findAllByOrderByCpuUsageDesc();
+
+        return processList.stream().map(process -> new ProcessRankDTO(process)).toList();
+    }
+
     @Transactional
     public void updateProcessByIdInProcessRank(Long id, ProcessRankEntity process) {
         processRankRepository.updateById(
@@ -98,6 +104,11 @@ public class ProcessRankService {
             process.getDiskWriteUsage(), 
             LocalDateTime.now()
             );
+    }
+
+    @Transactional
+    public void resetRank(){
+        processRankRepository.deleteAll();
     }
 
     public List<ProcessRankEntity> test(){

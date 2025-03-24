@@ -48,4 +48,6 @@ public interface ProcessRankRepository extends JpaRepository<ProcessRankEntity, 
     );
 
     boolean existsByName(String name);
+
+    public List<ProcessRankEntity> findAllByOrderByCpuUsageDesc();
 }
