@@ -21,7 +21,7 @@ public class ProcessRankController {
 
     @GetMapping("/rank/cpu-usage")
     public List<ProcessRankDTO> getProcessRank() {
-        List<ProcessRankDTO> processRankDto = processRankService.getAllProcesses();
+        List<ProcessRankDTO> processRankDto = processRankService.getAllProcessesOrderByCpuUsage();
         return processRankDto;
     }
 
