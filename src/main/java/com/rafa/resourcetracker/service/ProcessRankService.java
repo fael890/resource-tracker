@@ -51,6 +51,7 @@ public class ProcessRankService {
 
         processRank.clear();
         
+        // if pid and process exists in table process rank update row, else save a new process
         for (ProcessRankEntity process : filteredProcessRankList) {
             Optional<ProcessRankEntity> existingProcess = processRankRepository.findByPidAndName(process.getPid(), process.getName());
 
@@ -78,33 +79,6 @@ public class ProcessRankService {
         processRankRepository.updateByPidAndName(
             process.getPid(), 
             process.getName(), 
-            process.getCpuUsage(), 
-            process.getRamUsage(), 
-            process.getDiskReadUsage(), 
-            process.getDiskWriteUsage(), 
-            LocalDateTime.now()
-        );
-    }
-
-    @Transactional
-    public void updateProcessByIdInProcessRank(Long id, ProcessRankEntity process) {
-        processRankRepository.updateById(
-            id,
-            process.getPid(), 
-            process.getName(), 
-            process.getCpuUsage(), 
-            process.getRamUsage(), 
-            process.getDiskReadUsage(), 
-            process.getDiskWriteUsage(), 
-            LocalDateTime.now()
-        );
-    }
-
-    @Transactional
-    public void updateProcessByIdInProcessRank(String name, ProcessRankEntity process) {
-        processRankRepository.updateByName(
-            process.getPid(), 
-            name, 
             process.getCpuUsage(), 
             process.getRamUsage(), 
             process.getDiskReadUsage(), 
