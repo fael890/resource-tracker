@@ -1,7 +1,9 @@
 package com.rafa.resourcetracker.service;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import com.rafa.resourcetracker.dto.ProcessDTO;
@@ -31,7 +33,9 @@ public class ProcessMonitorService{
             e.printStackTrace();
         }
 
-        return osProcessList.stream().map(
+        List<ProcessDTO> processDTOList = null;
+
+        processDTOList = osProcessList.stream().map(
             process -> {
                 OSProcess secondSnapshot = os.getProcess(process.getProcessID());
                 
@@ -46,7 +50,12 @@ public class ProcessMonitorService{
                     null
                 );
             }
-        ).toList();
+        )
+        .collect(Collectors.toList());
+
+        processDTOList.sort((Comparator.comparing(ProcessDTO::getCpuUsage)).reversed());
+
+        return processDTOList;
     }
 
     public List<ProcessDTO> getProcessList(){
