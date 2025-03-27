@@ -44,8 +44,8 @@ public class ProcessMonitorService{
                     process.getName(),
                     (calculateProcessCpuUsage(process, secondSnapshot)),
                     process.getResidentSetSize() / (1024.0 * 1024.0),
-                    process.getBytesRead() / (1024.0 * 1024.0),
-                    process.getBytesWritten() / (1024.0 * 1024.0),
+                    calculateProcessDiskRead(process, secondSnapshot) / (1024.0 * 1024.0),
+                    calculateProcessDiskWritten(process, secondSnapshot) / (1024.0 * 1024.0),
                     timestamp,
                     null
                 );
@@ -70,5 +70,27 @@ public class ProcessMonitorService{
         double cpuUsage = secondProcessSnapshot.getProcessCpuLoadBetweenTicks(firstProcessSnapshot);
 
         return (cpuUsage / this.numberOfLogicalCPU) * 100;
+    }
+
+    public double calculateProcessDiskRead(OSProcess firstProcessSnapshot, OSProcess secondProcessSnapshot){
+        if (secondProcessSnapshot == null) {
+            return 0;
+        }
+
+        long diskRead1 = firstProcessSnapshot.getBytesRead();
+        long diskRead2 = secondProcessSnapshot.getBytesRead();
+        double readInBytes = (diskRead2 - diskRead1);
+        return readInBytes;
+    }
+
+    public double calculateProcessDiskWritten(OSProcess firstProcessSnapshot, OSProcess secondProcessSnapshot){
+        if (secondProcessSnapshot == null) {
+            return 0;
+        }
+
+        long diskWrite1 = firstProcessSnapshot.getBytesWritten();
+        long diskWrite2 = secondProcessSnapshot.getBytesWritten();
+        double writeInBytes = (diskWrite2 - diskWrite1);
+        return writeInBytes;
     }
 }
