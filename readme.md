@@ -8,12 +8,12 @@ Esse repositório contém o **back-end** do projeto. Acesse o link [https://gith
 
 Se você optar por baixa a release, o **front-end já está incluso**, pois essa separação foi feita apenas para organização do projeto.
 
-### :clipboard: Pré requisitos
+### Pré requisitos
 - Java JDK versão 21 ou superior
 - Maven versão 3.9.9 ou superior
 - Node versão 22.x (recomendado: 22.12.0 ou superior dentro da mesma versão principal)
 
-### :computer: Executando o projeto
+### Executando o projeto
 Meu objetivo foi tornar a utilização deste projeto o mais simples possível. Como fiz isso?
 
 Criei scripts em PowerShell e Batch para que o front-end e o back-end sejam iniciados com a execução de um único arquivo. Para mais detalhes, confira a seção [Facilitando a Execução com Scripts.](#facilitando-a-execução-com-scripts) 
