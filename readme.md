@@ -8,7 +8,7 @@ Esse repositório contém o **back-end** do projeto. Acesse o link [https://gith
 
 Se você optar por baixa a release, o **front-end já está incluso**, pois essa separação foi feita apenas para organização do projeto.
 
-### :clipboard: Pré requisitos
+### 🔩 Pré requisitos
 - Java JDK versão 21 ou superior
 - Maven versão 3.9.9 ou superior
 - Node versão 22.x (recomendado: 22.12.0 ou superior dentro da mesma versão principal)
@@ -16,12 +16,12 @@ Se você optar por baixa a release, o **front-end já está incluso**, pois essa
 ### :computer: Executando o projeto
 Meu objetivo foi tornar a utilização deste projeto o mais simples possível. Como fiz isso?
 
-Criei scripts em PowerShell e Batch para que o front-end e o back-end sejam iniciados com a execução de um único arquivo. Para mais detalhes, confira a seção [Facilitando a Execução com Scripts.](#facilitando-a-execução-com-scripts) 
+Criei scripts em PowerShell e Batch para que o front-end e o back-end sejam iniciados com a execução de um único arquivo. Para mais detalhes, confira a seção [Facilitando a Execução com Scripts.](#-facilitando-a-execução-com-scripts) 
 
 Para facilitar ainda mais, disponibilizei uma release chamada `resource-tracker-v1.0.0-windows`, que você pode baixar diretamente neste link: [Acesse a release aqui!](https://github.com/fael890/resource-tracker/releases/tag/v1.0.0).
 
 **Como executar?**
-Se você tiver os [pré-requisitos](#pré-requisitos) instalados, siga os passos abaixo:
+Se você tiver os [pré-requisitos](#-pré-requisitos) instalados, siga os passos abaixo:
 
 1. Acesse o link da release e baixe o arquivo `resource-tracker-1.0.0v-windows.zip`.
 2. Extraia o conteúdo do ZIP.
@@ -53,7 +53,7 @@ Se você tiver os [pré-requisitos](#pré-requisitos) instalados, siga os passos
 |WS CONNECT| `ws://localhost:8080/connection` | Conecta o cliente no websocket.                      | -                                           |
 | GET      | `/topic/monitor`                 | Inscreve o cliente para receber mensagens.           | -                                           |
 
-### :nut_and_bolt: Facilitando a Execução com Scripts
+### 🔩 Facilitando a Execução com Scripts
 
 Para facilitar a execução do front-end e do back-end, optei por utilizar alguns scripts que inicializam o Electron em um terminal e o Spring em outro. Abaixo, segue o código do script ".ps1":
 
