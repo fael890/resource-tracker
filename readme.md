@@ -8,20 +8,20 @@ Esse repositório contém o **back-end** do projeto. Acesse o link [https://gith
 
 Se você optar por baixa a release, o **front-end já está incluso**, pois essa separação foi feita apenas para organização do projeto.
 
-### Pré requisitos
+### :clipboard: Pré requisitos
 - Java JDK versão 21 ou superior
 - Maven versão 3.9.9 ou superior
 - Node versão 22.x (recomendado: 22.12.0 ou superior dentro da mesma versão principal)
 
-### Executando o projeto
+### :computer: Executando o projeto
 Meu objetivo foi tornar a utilização deste projeto o mais simples possível. Como fiz isso?
 
-Criei scripts em PowerShell e Batch para que o front-end e o back-end sejam iniciados com a execução de um único arquivo. Para mais detalhes, confira a seção [Facilitando a Execução com Scripts.](#facilitando-a-execução-com-scripts) 
+Criei scripts em PowerShell e Batch para que o front-end e o back-end sejam iniciados com a execução de um único arquivo. Para mais detalhes, confira a seção [Facilitando a Execução com Scripts.](#-facilitando-a-execução-com-scripts) 
 
 Para facilitar ainda mais, disponibilizei uma release chamada `resource-tracker-v1.0.0-windows`, que você pode baixar diretamente neste link: [Acesse a release aqui!](https://github.com/fael890/resource-tracker/releases/tag/v1.0.0).
 
-#### Como executar?
-Se você tiver os [pré-requisitos](#pré-requisitos) instalados, siga os passos abaixo:
+**Como executar?**
+Se você tiver os [pré-requisitos](#-pré-requisitos) instalados, siga os passos abaixo:
 
 1. Acesse o link da release e baixe o arquivo `resource-tracker-1.0.0v-windows.zip`.
 2. Extraia o conteúdo do ZIP.
@@ -32,7 +32,7 @@ Se você tiver os [pré-requisitos](#pré-requisitos) instalados, siga os passos
 ![Spring](https://img.shields.io/badge/-Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white) ![Spring Boot](https://img.shields.io/badge/-Spring%20Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white) ![Hibernate](https://img.shields.io/badge/-Hibernate-59666C?style=for-the-badge&logo=Hibernate&logoColor=white) ![H2 Database](https://img.shields.io/badge/-H2%20Database-09476B?style=for-the-badge&logo=h2database&logoColor=white) ![WebSocket](https://img.shields.io/badge/-WebSocket-535D6C?style=for-the-badge&) ![NextJS](https://img.shields.io/badge/NextJS-000000?style=for-the-badge&logo=nextdotjs&logoColor=white) ![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white) ![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white) ![React](https://img.shields.io/badge/-ReactJs-61DAFB?style=for-the-badge&logo=react&logoColor=white) ![React Bootstrap](https://img.shields.io/badge/-React%20Bootstrap-41E0FD?style=for-the-badge&logo=reactbootstrap&logoColor=white) ![Electron](https://img.shields.io/badge/-Electron-47848F?style=for-the-badge&logo=electron&logoColor=white) ![CSS](https://img.shields.io/badge/-CSS-663399?style=for-the-badge&logo=css&logoColor=white) ![Stomp](https://img.shields.io/badge/-Stomp-535D6C?style=for-the-badge)
 
 ## :pencil2: Desenvolvimento
-### Estrutura do Projeto
+### :file_folder: Estrutura do Projeto
 - Controller: contém os controladores responsáveis por gerenciar as requisições feitas para a API.
 - Entity: armazena as classes do modelo de negócio, que são mapeadas como tabelas no banco de dados.
 - Service: contém as classes de serviço responsáveis por implementar as regras de negócio do sistema.
@@ -40,11 +40,11 @@ Se você tiver os [pré-requisitos](#pré-requisitos) instalados, siga os passos
 - DTO: armazena os Data Transfer Objects (DTOs), utilizados para selecionar dados específicos das entidades, aumentando a segurança e evitando a exposição direta dos modelos na API.
 - Websocket: contém todos os arquivos de configuração necessários do websocket
 
-### Class diagram
+### :mag_right: Class diagram
 
 ![Class Digrama Image](class_diagram_v3.png)
 
-### API Endpoints
+### :page_facing_up: API Endpoints
 
 | Método   | Endpoint                         | Descrição                                            | Exemplo de Corpo (se aplicável)             |
 |----------|----------------------------------|------------------------------------------------------|---------------------------------------------|
@@ -53,7 +53,7 @@ Se você tiver os [pré-requisitos](#pré-requisitos) instalados, siga os passos
 |WS CONNECT| `ws://localhost:8080/connection` | Conecta o cliente no websocket.                      | -                                           |
 | GET      | `/topic/monitor`                 | Inscreve o cliente para receber mensagens.           | -                                           |
 
-### Facilitando a Execução com Scripts
+### :nut_and_bolt: Facilitando a Execução com Scripts
 
 Para facilitar a execução do front-end e do back-end, optei por utilizar alguns scripts que inicializam o Electron em um terminal e o Spring em outro. Abaixo, segue o código do script ".ps1":
 
