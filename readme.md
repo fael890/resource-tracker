@@ -1,4 +1,8 @@
 # Resource Tracker
+## Requisitos para rodar o projeto
+- Java JDK versão 21 ou superior
+- Maven versão 3.9.9 ou superior
+- Node versão 22.12.0
 
 ## :books: Bem vindo ao projeto Resource Tracker
 O **Resource Tracker** é um projeto desenvolvido para monitorar processos do computador, oferecendo um sistema de ranking que exibe os processos que mais consumiram recursos enquanto o sistema esteve em execução.
