@@ -8,7 +8,7 @@ Esse repositório contém o **back-end** do projeto. Acesse o link [https://gith
 
 Se você optar por baixa a release, o **front-end já está incluso**, pois essa separação foi feita apenas para organização do projeto.
 
-### 🔩 Pré requisitos
+### 📋 Pré requisitos
 - Java JDK versão 21 ou superior
 - Maven versão 3.9.9 ou superior
 - Node versão 22.x (recomendado: 22.12.0 ou superior dentro da mesma versão principal)
