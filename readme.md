@@ -16,12 +16,12 @@ Se você optar por baixa a release, o **front-end já está incluso**, pois essa
 ### :computer: Executando o projeto
 Meu objetivo foi tornar a utilização deste projeto o mais simples possível. Como fiz isso?
 
-Criei scripts em PowerShell e Batch para que o front-end e o back-end sejam iniciados com a execução de um único arquivo. Para mais detalhes, confira a seção [Facilitando a Execução com Scripts.](#-facilitando-a-execução-com-scripts) 
+Criei scripts em PowerShell e Batch para que o front-end e o back-end sejam iniciados com a execução de um único arquivo. Para mais detalhes, confira a seção [Facilitando a Execução com Scripts.](#facilitando-a-execução-com-scripts) 
 
 Para facilitar ainda mais, disponibilizei uma release chamada `resource-tracker-v1.0.0-windows`, que você pode baixar diretamente neste link: [Acesse a release aqui!](https://github.com/fael890/resource-tracker/releases/tag/v1.0.0).
 
 **Como executar?**
-Se você tiver os [pré-requisitos](#-pré-requisitos) instalados, siga os passos abaixo:
+Se você tiver os [pré-requisitos](#pré-requisitos) instalados, siga os passos abaixo:
 
 1. Acesse o link da release e baixe o arquivo `resource-tracker-1.0.0v-windows.zip`.
 2. Extraia o conteúdo do ZIP.
